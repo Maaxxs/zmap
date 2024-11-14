@@ -5,6 +5,7 @@
 *.pyo
 *~
 \#*
+src/nils
 src/zmap
 src/zopt.h
 src/zopt.c

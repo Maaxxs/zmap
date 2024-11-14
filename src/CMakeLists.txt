@@ -100,6 +100,12 @@ set(ZBLSOURCES
     "${CMAKE_CURRENT_BINARY_DIR}/zbopt.h"
 )
 
+set(SOURCES_NILS
+    aesrand.c
+    # cyclic.c
+    nils.c
+)
+
 set(ZITSOURCES
     aesrand.c
     cyclic.c
@@ -218,6 +224,7 @@ add_custom_target(manpages ronn "${CMAKE_CURRENT_SOURCE_DIR}/zmap.1.ronn" --orga
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 )
 
+add_executable(nils ${SOURCES_NILS})
 add_executable(zmap ${SOURCES})
 add_executable(zblocklist ${ZBLSOURCES})
 add_executable(ziterate ${ZITSOURCES})
@@ -229,6 +236,11 @@ else()
     set(ZTESTSOURCES ${ZTESTSOURCES} send-linux.c)
     set(SOURCES ${SOURCES} send-linux.c)
 endif()
+
+target_link_libraries(
+    nils
+    zmaplib
+)
 
 target_link_libraries(
     zmap
